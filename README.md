@@ -38,3 +38,5 @@ Projeto para fins de estudo, criado usando Vite, ReactJS, IMDB API, e JavaScript
 # Documentação da API:
 
 - Você pode conferir toda a documentação da API [aqui.](https://pokeapi.co/docs/v2)
+
+testando
