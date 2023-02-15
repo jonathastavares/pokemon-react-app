@@ -1,4 +1,4 @@
-# IMDB-REACT-APP
+# POKEMON-REACT-APP
 Projeto para fins de estudo, criado usando Vite, ReactJS, IMDB API, e JavaScript.
 
 ## Tecnologias utilizadas:
@@ -6,7 +6,7 @@ Projeto para fins de estudo, criado usando Vite, ReactJS, IMDB API, e JavaScript
 - ReactJS
 - Vite
 - Yarn
-- IMDB API
+- Poke API
 - Axios
 - TailwindCSS
 
@@ -27,7 +27,7 @@ Projeto para fins de estudo, criado usando Vite, ReactJS, IMDB API, e JavaScript
 
 - Agora sim, temos todas as dependências instaladas, podemos clonar e executar o projeto.
 
-- Ainda no terminal, digite `git clone git@github.com:jonathastavares/imdb-react-app.git`, esse comando irá clonar o git para a pasta atual onde você está no seu terminal.
+- Ainda no terminal, digite `git clone git@github.com:jonathastavares/pokemon-react-app.git`, esse comando irá clonar o git para a pasta atual onde você está no seu terminal.
 
 - Após clonar, digite `cd imdb-react-app`, esse comando irá navegar para a pasta imdb-react-app, que foi criada no passo anterior ao clonar o projeto.
 
@@ -35,3 +35,6 @@ Projeto para fins de estudo, criado usando Vite, ReactJS, IMDB API, e JavaScript
 
 - E por fim: `yarn dev`, esse comando será o mais utilizado durante todo o desenvolvimento, ele é usado para rodar o projeto na versão atual.
  
+# Documentação da API:
+
+- Você pode conferir toda a documentação da API [aqui.](https://pokeapi.co/docs/v2)
