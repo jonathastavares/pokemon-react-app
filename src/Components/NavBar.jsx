@@ -1,21 +1,20 @@
-import React from 'react'
+import React from 'react';
 
-
-const NavBar = () => {
+function NavBar() {
   return (
-    
-    <section className='flex justify-between h-[5rem] bg-yellow-100' >
-      <a href='/'>
-        <img  className= 'h-[6rem]' src='./log-pokemon.png' alt=''/>
+
+    <section className="px-10 flex items-center justify-between h-[5rem] bg-yellow-350">
+      <a href="/">
+        <img className="h-[6rem]" src="./log-pokemon.png" alt="" />
       </a>
-      
-      <div>
-        <a  href='#'>Meu time</a>
-        <input type="text" placeholder='Search' />
-      </div>      
-    </section>      
-  
-  )
+
+      <div className="flex gap-20">
+        <a href="/">Meu time</a>
+        <input type="text" placeholder="Search" />
+      </div>
+    </section>
+
+  );
 }
 
-export default NavBar
+export default NavBar;
