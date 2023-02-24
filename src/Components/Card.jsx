@@ -4,9 +4,10 @@ const Card = () => {
 
     return(
         <div className="flex items-center border border-gray-500 w-[20rem] h-[25rem] flex-col m-5 rounded-2xl ">
-            <img className=" border-gray-500 w-full h-[14rem] rounded-2xl p-4">
+            <img className="border border-gray-500 w-full h-[14rem] p-4">
             </img>
-            <div>
+            <div className="rounded-2x1 border border-gray-500">
+
                 <h1>
                     pikachu
                 </h1>
