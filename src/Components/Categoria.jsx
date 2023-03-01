@@ -4,12 +4,12 @@ import React, { useEffect, useState } from 'react';
 import Card from './Card';
 
 function Categoria({ nome, pokemonsDaCategoria, pegarTiposDoPokemon }) {
-  const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
+  const [backgroundColor, setBackgroundColor] = useState(null);
   const colors = [
-    { name: 'grass', color: '#2be017' },
-    { name: 'poison', color: '#e017d6' },
-    { name: 'fire', color: '#e02e17' },
-    { name: 'flying', color: '#afe8e5' },
+    { name: 'grass', color: 'grass' },
+    { name: 'poison', color: 'poison' },
+    { name: 'fire', color: 'fire' },
+    { name: 'flying', color: 'flying' },
   ];
 
   const pegarCorDeFundo = () => {
@@ -19,7 +19,7 @@ function Categoria({ nome, pokemonsDaCategoria, pegarTiposDoPokemon }) {
     if (result) {
       setBackgroundColor(result.color);
     } else {
-      setBackgroundColor('#FFFFFF');
+      setBackgroundColor('white');
     }
   };
 
@@ -30,8 +30,8 @@ function Categoria({ nome, pokemonsDaCategoria, pegarTiposDoPokemon }) {
     <div>
       <h1 className="font-bold text-2xl pl-6">{nome.toUpperCase()}</h1>
       <div className="flex overflow-x-scroll">
-        {pokemonsDaCategoria.map((pokemon) => (
-          <Card name={pokemon.name} types={pegarTiposDoPokemon(pokemon)} imagem={pokemon.sprites?.other?.dream_world?.front_default} backgroundColor={backgroundColor} />
+        {backgroundColor && pokemonsDaCategoria.map((pokemon) => (
+          <Card name={pokemon.name} types={pegarTiposDoPokemon(pokemon)} imagem={pokemon.sprites?.other?.dream_world?.front_default || pokemon.sprites?.front_default} backgroundColor={backgroundColor} />
         ))}
       </div>
     </div>

@@ -35,7 +35,6 @@ function PaginaPokemon() {
   const pegarInformacoesDoPokemon = async () => {
     const resultado = await axios.get(`https://pokeapi.co/api/v2/pokemon/${params.pokemon}`);
     setPokemon(resultado.data);
-    console.log(resultado.data);
     pegarEvolucoesDoPokemon(resultado.data);
   };
 
@@ -55,7 +54,7 @@ function PaginaPokemon() {
     <div className="w-full h-full flex flex-col justify-center items-center p-20 gap-20">
       <div className="w-full flex flex-col justify-center items-center">
         <h1 className="font-bold text-2xl">{pokemon?.name.toUpperCase()}</h1>
-        <img className="h-[15rem] w-auto" src={pokemon?.sprites?.other?.dream_world?.front_default} alt={`Imagem do ${pokemon?.name}`} />
+        <img className="h-[15rem] w-auto" src={pokemon?.sprites?.other?.dream_world?.front_default || pokemon?.sprites?.front_default} alt={`Imagem do ${pokemon?.name}`} />
       </div>
 
       <div className="w-full justify-center items-center text-center gap-4">
@@ -74,7 +73,9 @@ function PaginaPokemon() {
         </div>
       </div>
 
+      {evolucoes && evolucoes.length > 0 && (
       <Categoria nome="EVOLUÇÕES" pokemonsDaCategoria={evolucoes} pegarTiposDoPokemon={pegarTiposDoPokemon} />
+      )}
     </div>
   );
 }

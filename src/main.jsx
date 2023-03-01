@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import NavBar from './Components/NavBar';
 import PaginaPokemon from './Components/PaginaPokemon';
+import MeusTimes from './Components/MeusTimes';
 import './styles/global.css';
 
 const router = createBrowserRouter([
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: '/:pokemon',
     element: <PaginaPokemon />,
+  },
+  {
+    path: '/meus_times',
+    element: <MeusTimes />,
   },
 ]);
 

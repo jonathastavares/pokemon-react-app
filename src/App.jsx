@@ -6,7 +6,6 @@ import Categoria from './Components/Categoria';
 function App() {
   const [data, setData] = useState([]);
   const [categorias, setCategorias] = useState([]);
-  // const params = useparams();
 
   const pegarCategorias = (resultado) => {
     const todasAsCategorias = [];
@@ -57,7 +56,7 @@ function App() {
   }, []);
 
   return (
-    <div className="py-8">
+    <div className="py-28">
       {categorias && categorias.map((categoria) => (
         <Categoria key={categoria} nome={categoria} pokemonsDaCategoria={pegarPokemonsDeUmaCategoria(categoria)} pegarTiposDoPokemon={pegarTiposDoPokemon} />
       ))}
