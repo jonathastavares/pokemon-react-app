@@ -27,14 +27,14 @@ function App() {
     pegarCategorias(resultado);
   };
 
-  const GetName = async () => {
+  const pegarListaUrl = async () => {
     const resultado = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100&offset=0');
     const dados = resultado.data.results;
-    const listaNomes = [];
+    const listaUrl = [];
     dados.forEach((obj) => {
-      listaNomes.push(obj.url);
+      listaUrl.push(obj.url);
     });
-    getPokemon(listaNomes);
+    getPokemon(listaUrl);
   };
 
   const pegarTiposDoPokemon = (pokemon) => {
@@ -52,7 +52,7 @@ function App() {
   };
 
   useEffect(() => {
-    GetName();
+    pegarListaUrl();
   }, []);
 
   return (
