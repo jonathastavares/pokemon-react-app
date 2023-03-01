@@ -1,18 +1,31 @@
+/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
-import Card from './Components/Card';
+import Categoria from './Components/Categoria';
 
 function App() {
   const [data, setData] = useState([]);
+  const [categorias, setCategorias] = useState([]);
   // const params = useparams();
+
+  const pegarCategorias = (resultado) => {
+    const todasAsCategorias = [];
+    resultado.forEach((pokemon) => {
+      pokemon.types.forEach((tipo) => {
+        todasAsCategorias.push(tipo.type.name);
+      });
+    });
+    const categoriasFiltradas = [...new Set(todasAsCategorias)];
+    setCategorias(categoriasFiltradas);
+  };
+
   const getPokemon = async (dados) => {
     const resultado = await Promise.all(dados.map(async (url) => {
       const results = await axios.get(url);
       return results.data;
     }));
     setData(resultado);
-    console.log(resultado);
+    pegarCategorias(resultado);
   };
 
   const GetName = async () => {
@@ -24,17 +37,29 @@ function App() {
     });
     getPokemon(listaNomes);
   };
+
+  const pegarTiposDoPokemon = (pokemon) => {
+    const tipos = [];
+    pokemon.types.forEach((type) => {
+      tipos.push(type.type.name);
+    });
+    return tipos;
+  };
+
+  const pegarPokemonsDeUmaCategoria = (categoria) => {
+    const pokemonsDaCategoria = data.filter((pokemon) => pokemon.types.some((tipo) => tipo.type.name.includes(categoria)));
+
+    return pokemonsDaCategoria;
+  };
+
   useEffect(() => {
     GetName();
   }, []);
 
-  // const getPokemon = async () => {
-  // const resultado = await axios.get(`https://pokeapi.co/api/v2/pokemon/${params.pokemon_name}`);
-
   return (
-    <div>
-      {data.map((pokemon) => (
-        <Card name={nome} />
+    <div className="py-8">
+      {categorias && categorias.map((categoria) => (
+        <Categoria key={categoria} nome={categoria} pokemonsDaCategoria={pegarPokemonsDeUmaCategoria(categoria)} pegarTiposDoPokemon={pegarTiposDoPokemon} />
       ))}
 
     </div>

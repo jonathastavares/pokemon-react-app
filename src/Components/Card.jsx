@@ -1,20 +1,28 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
-function Card({ name }) {
+function Card({
+  name, types, imagem, backgroundColor,
+}) {
   return (
-    <div className="flex items-center border border-gray-500 w-[20rem] h-[25rem] flex-col m-5 rounded-2xl ">
-      <img className="border border-gray-500 w-full h-[14rem] p-4" alt="" />
-      <div className="rounded-2x1 border border-gray-500">
+    <a
+      href={`/${name}`}
+      className={`hover:scale-105 flex items-center min-w-[20rem] h-[25rem] flex-col m-5 border border-gray-500 rounded-2xl bg-[${backgroundColor}]`}
+    >
+      <img className=" w-full h-[14rem] p-4" src={imagem} alt={`Imagem do ${name}`} />
+      <div className="flex flex-col justify-center gap-6 items-center w-full h-full rounded-2x1">
 
-        <h1>
+        <h1 className="font-bold text-xl">
           {name}
         </h1>
-        <p>
-          informação pokémon
-        </p>
+        <div>
+          {types.map((tipo) => (
+            <p>{tipo}</p>
+          ))}
+        </div>
 
       </div>
-    </div>
+    </a>
   );
 }
 
