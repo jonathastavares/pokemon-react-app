@@ -1,30 +1,32 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+// @ts-ignore
+import {
+  BrowserRouter, Routes, Route,
+} from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+// import { NotificationContainer } from 'react-notifications';
 import App from './App';
 import NavBar from './Components/NavBar';
 import PaginaPokemon from './Components/PaginaPokemon';
-import MeusTimes from './Components/MeusTimes';
+import MeuTime from './Components/MeuTime';
+import store from './store';
 import './styles/global.css';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-  },
-  {
-    path: '/:pokemon',
-    element: <PaginaPokemon />,
-  },
-  {
-    path: '/meus_times',
-    element: <MeusTimes />,
-  },
-]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <NavBar />
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <BrowserRouter>
+        <NavBar />
+        <div>
+          {/* <NotificationContainer /> */}
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/:pokemon" element={<PaginaPokemon />} />
+            <Route path="/meu_time" element={<MeuTime />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
 );

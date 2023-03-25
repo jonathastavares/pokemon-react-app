@@ -31,7 +31,7 @@ function Categoria({ nome, pokemonsDaCategoria, pegarTiposDoPokemon }) {
       <h1 className="font-bold text-2xl pl-6">{nome.toUpperCase()}</h1>
       <div className="flex overflow-x-scroll">
         {backgroundColor && pokemonsDaCategoria.map((pokemon) => (
-          <Card name={pokemon.name} types={pegarTiposDoPokemon(pokemon)} imagem={pokemon.sprites?.other?.dream_world?.front_default || pokemon.sprites?.front_default} backgroundColor={backgroundColor} />
+          <Card key={pokemon.id} name={pokemon.name} types={pegarTiposDoPokemon(pokemon)} imagem={pokemon.sprites?.other?.dream_world?.front_default || pokemon.sprites?.front_default} backgroundColor={backgroundColor} />
         ))}
       </div>
     </div>

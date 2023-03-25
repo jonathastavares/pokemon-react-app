@@ -1,41 +1,15 @@
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import Categoria from './Components/Categoria';
+import { fetchPokemons } from './redux/pokemonSlice';
 
 function App() {
-  const [data, setData] = useState([]);
-  const [categorias, setCategorias] = useState([]);
+  const dispatch = useDispatch();
+  const pokemons = useSelector((state) => state.pokemon.pokemons);
+  const categorias = useSelector((state) => state.pokemon.categorias);
 
-  const pegarCategorias = (resultado) => {
-    const todasAsCategorias = [];
-    resultado.forEach((pokemon) => {
-      pokemon.types.forEach((tipo) => {
-        todasAsCategorias.push(tipo.type.name);
-      });
-    });
-    const categoriasFiltradas = [...new Set(todasAsCategorias)];
-    setCategorias(categoriasFiltradas);
-  };
-
-  const getPokemon = async (dados) => {
-    const resultado = await Promise.all(dados.map(async (url) => {
-      const results = await axios.get(url);
-      return results.data;
-    }));
-    setData(resultado);
-    pegarCategorias(resultado);
-  };
-
-  const pegarListaUrl = async () => {
-    const resultado = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100&offset=0');
-    const dados = resultado.data.results;
-    const listaUrl = [];
-    dados.forEach((obj) => {
-      listaUrl.push(obj.url);
-    });
-    getPokemon(listaUrl);
-  };
+  const [isLoading, setIsLoading] = useState(true);
 
   const pegarTiposDoPokemon = (pokemon) => {
     const tipos = [];
@@ -46,20 +20,36 @@ function App() {
   };
 
   const pegarPokemonsDeUmaCategoria = (categoria) => {
-    const pokemonsDaCategoria = data.filter((pokemon) => pokemon.types.some((tipo) => tipo.type.name.includes(categoria)));
+    const pokemonsDaCategoria = pokemons.filter((pokemon) => pokemon.types.some((tipo) => tipo.type.name.includes(categoria)));
 
     return pokemonsDaCategoria;
   };
 
   useEffect(() => {
-    pegarListaUrl();
+    dispatch(fetchPokemons());
   }, []);
 
+  useEffect(() => {
+    if (pokemons.length > 0 && categorias.length > 0) {
+      setIsLoading(false);
+    }
+  }, [pokemons, categorias]);
+
   return (
-    <div className="py-28">
-      {categorias && categorias.map((categoria) => (
-        <Categoria key={categoria} nome={categoria} pokemonsDaCategoria={pegarPokemonsDeUmaCategoria(categoria)} pegarTiposDoPokemon={pegarTiposDoPokemon} />
-      ))}
+    <div>
+      {isLoading ? (
+        <div className="text-black w-screen h-screen text-center text-3xl justify-center items-center flex">
+          <h1>
+            CARREGANDO...
+          </h1>
+        </div>
+      ) : (
+        <div className="py-28">
+          {categorias && categorias.map((categoria) => (
+            <Categoria key={categoria} nome={categoria} pokemonsDaCategoria={pegarPokemonsDeUmaCategoria(categoria)} pegarTiposDoPokemon={pegarTiposDoPokemon} />
+          ))}
+        </div>
+      )}
 
     </div>
   );

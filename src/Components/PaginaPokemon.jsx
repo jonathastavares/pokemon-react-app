@@ -2,10 +2,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchPokemons } from '../redux/pokemonSlice';
 import Categoria from './Categoria';
 
 function PaginaPokemon() {
   const params = useParams();
+  const dispatch = useDispatch();
   const [pokemon, setPokemon] = useState(null);
   const [evolucoes, setEvolucoes] = useState([]);
 
@@ -16,6 +19,10 @@ function PaginaPokemon() {
     }));
     setEvolucoes(resultado);
   };
+
+  useEffect(() => {
+    dispatch(fetchPokemons());
+  }, []);
 
   const pegarEvolucoesDoPokemon = async (poke) => {
     const todasAsEvolucoes = [];
